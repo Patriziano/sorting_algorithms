@@ -2,8 +2,6 @@
 
 /**
  * swap - The function that swaps two numbers
- * @first: the first number
- * @second: the second number
  * Return: Nothing
  */
 
