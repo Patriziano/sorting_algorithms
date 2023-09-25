@@ -21,10 +21,11 @@ void swap(int *first, int *second)
  * @array: The array of numbers
  * @low: The lowest index
  * @high: The highest index
+ * @size: The array size
  * Return: The index of the pivot when it is at its right position
  */
 
-int partition(int *array, int low, int high)
+int partition(int *array, int low, int high, size_t size)
 {
 	int pivot, idx, j;
 
@@ -36,10 +37,10 @@ int partition(int *array, int low, int high)
 		{
 			idx++;
 			swap(&array[idx], &array[j]);
-			print_array(array, (high + 1));
 		}
 	}
 	swap(&array[idx + 1], &array[high]);
+	print_array(array, (size));
 	return (idx + 1);
 }
 
@@ -48,18 +49,19 @@ int partition(int *array, int low, int high)
  * @array: An array of number
  * @low: The lowest index of an array and sub-arrays
  * @high: The highest index of an array and sub-arrays
+ * @size: The array size
  * Return: Nothing
  */
 
-void q_sort(int *array, int low, int high)
+void q_sort(int *array, int low, int high, size_t size)
 {
 	int part_idx;
 
 	if (low < high)
 	{
-		part_idx = partition(array, low, high);
-		q_sort(array, low, part_idx - 1);
-		q_sort(array, part_idx + 1, high);
+		part_idx = partition(array, low, high, size);
+		q_sort(array, low, part_idx - 1, size);
+		q_sort(array, part_idx + 1, high, size);
 	}
 }
 
@@ -81,5 +83,5 @@ void quick_sort(int *array, size_t size)
 	high = size - 1;
 
 	low = 0;
-	q_sort(array, low, high);
+	q_sort(array, low, high, size);
 }
