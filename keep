@@ -1,0 +1,57 @@
+if ((*key)->next != NULL)
+		(*key)->next->prev = (*pred);
+	if ((*pred)->prev != NULL)
+		(*pred)->prev->next = (*key);
+
+
+
+#include "sort.h"
+
+
+listint_t *swap_list(listint_t **pred, listint_t **key)
+{
+	listint_t *tmp;
+	listint_t *newtmp;
+       
+	tmp = (*key)->next;
+	newtmp = (*pred)->prev;
+	
+	(*key)->next = (*pred);
+	(*pred)->next = tmp;
+	(*pred)->prev = (*key);
+	if (tmp != NULL)
+		tmp->prev = (*pred);
+	if (newtmp != NULL)
+		newtmp->next = (*key);
+	(*key)->prev = newtmp;
+	return (*key);
+
+}
+
+/**
+ * insertion_sort_list - function that sorts a doubly linked list of integers
+ * 			in ascending order using the Insertion sort algorithm
+ * @list: The pointer to the head of the list
+ * Return: Nothing
+ */
+
+void insertion_sort_list(listint_t **list)
+{
+	listint_t *current, *key, *pred;
+	int i = 0;
+
+
+	if ((*list) != NULL || (*list)->next != NULL || list != NULL)
+	{
+		current = (*list);
+		current = current->next;
+
+		while (current != NULL)
+		{
+			printf("iteration out: %d\n", ++i);
+
+			key = current;
+			pred = current->prev;
+			while (pred != NULL && (pred->n) > (key->n))
+			{
+				pred = swap_list(&pred, &current);
