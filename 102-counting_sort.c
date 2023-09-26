@@ -43,7 +43,7 @@ void counting_sort(int *array, size_t size)
 	{
 		counting_array[i] += counting_array[i - 1];
 	}
-
+	print_array(counting_array, max_value + 1);
 	/* Create a temporary output array. */
 	output = malloc(size * sizeof(int));
 	if (output == NULL)
@@ -65,14 +65,14 @@ void counting_sort(int *array, size_t size)
 		array[input] = output[input];
 	}
 
-	for (i = 0; i <= max_value; i++)
+/*	for (i = 0; i <= max_value; i++)
 	{
 		printf("%d", counting_array[i]);
-		if (i < max_value)
+		if (i <= max_value)
 			printf(", ");
 	}
 	printf("\n");
-
+*/
 	/* Free dynamically allocated memory. */
 	free(counting_array);
 	free(output);
